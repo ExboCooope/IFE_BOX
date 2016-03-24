@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="main.css" />
+    <link rel="stylesheet" type="text/css" href="js/test.css" />
+    <title></title>
+</head>
+<body>
+    <div class="mainBody">
+        <div class="top">
+
+        </div>
+
+        <div class="down">
+             <div style="margin: 0 auto;width: 400px">
+                <button id="submit1">提交指令</button>
+                <button id="cancel1">取消所有指令</button>
+                <button id="buildwall">随机创建墙</button>
+                 <button id="clean">清空日志</button>
+            </div><br>
+        </div>
+        <div class="mid">
+            <div class="mid1"></div>
+            <span>
+                <input type="checkbox" checked="true" id="ami" />启用动画&nbsp&nbsp
+                <input type="checkbox" checked="true" id="vsync" />垂直同步<br>
+                <input type="checkbox" checked="true" id="context" />右键菜单&nbsp&nbsp
+                <input type="checkbox" id="pause" />暂停<br>
+
+                <input type="number" value="10" id="axisx" />列数量&nbsp&nbsp
+                <input type="number" value="10" id="axisy" />行数量<br>
+                <input type="number" value="60" id="amis1" />移动动画用时&nbsp&nbsp
+                <input type="number" value="30" id="amis2" />转向动画用时<br>
+
+             </span>
+        </div>
+    </div>
+    <script src="js/DomBuilder.js"></script>
+    <script src="js/AreaSelector.js"></script>
+    <script src="js/DataSource.js"></script>
+    <script src="js/MenuSystem.js"></script>
+    <script src="js/EEditor.js"></script>
+    <script src="main.js"></script>
+    <script>
+     var ipt=new InputObject();
+     $sc("down").$ap(ipt.dom);
+
+     var aa=new BlockMainDisplay(400,400,10,10);
+     aa.make();
+     $sc("top").$ap(aa.dom);
+
+     $sc("mid1").$ap(Global.console);
+
+
+     var s=new AreaSelector();
+     aa.dom.addSelector(s);
+     document.body.setStatic();
+
+     //  var a0=Global.createBlock(0);
+     //   a0.position[0]=0.7;
+     //   a0.position[1]=0.8;
+
+        var p=Global.setPlayerPos(3,3);
+        Global.refresher();
+
+
+        window.onresize=function(e){
+            //console.log(1);
+            if(document.body.clientWidth<700){
+                $sc("mid").$c("mid_down");
+            }else{
+                $sc("mid_down").$c("mid");
+            }
+        };
+
+    $si("submit1").onclick=function(e){Global.input.submit();};
+    $si("clean").onclick=function(e){$sc("console").$Sa().$del();};
+    $si("cancel1").onclick=function(){OrderEmitter.resetOrder();}
+    $si("buildwall").onclick=function(){
+        var i=Math.random()*Global.block_area.w>>0;
+        var j=Math.random()*Global.block_area.h>>0;
+        Global.block_area.setWall(i,j);
+    };
+
+     $si("axisx").onchange=function(e){
+         if(this.value<1)this.value=1;
+         if(this.value>20)this.value=20;
+         Global.block_area.setWH($si("axisx").value,$si("axisy").value);
+         Global.block_display.setWH($si("axisx").value,$si("axisy").value);
+     };
+     $si("axisy").onchange=$si("axisx").onchange;
+     $si("ami").onchange=function(e){Global.allow_animation=this.checked; };
+     $si("amis1").onchange=function(e){
+         if(this.value<0)this.value=0;
+         if(this.value>120)this.value=120;
+         Global.move_time=+this.value;
+     };
+     $si("amis2").onchange=function(e){
+         if(this.value<0)this.value=0;
+         if(this.value>120)this.value=120;
+         Global.rotate_time=+this.value;
+     };
+     $si("context").onchange=function(e){$sc("blockEMPTY").$run("setContextMenu",this.checked?[BlockArea.m]:[])};
+     $si("pause").onchange=function(e){
+         Global.paused=this.checked;
+         if(!this.checked && Global.stopped){
+             Global.refresher();
+         }
+     };
+
+
+    </script>
+</body>
+</html>

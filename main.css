@@ -1,0 +1,22 @@
+
+.inputAREA{background-color: black;color: green;width: 300px;height: 200px;display: inline-block;
+    position: absolute;left: 24px;font-size: 16px;border: 0 solid;padding-left: 10px;resize: none;}
+.inputSIDENOTE{background-color: gray;color: white;width: 24px;display: inline-block;height: 400px;text-align: center;position: absolute;}
+.inputMAIN{height: 200px;font-size: 16px;position: relative;width: 400px;overflow: hidden;margin: 0 auto;}
+.blockMAIN{border: 2px solid #000000;position: absolute;display: inline-block;width: 500px;height: 500px;padding: -1px;}
+.blockWALL{background-color: gray;display: inline-block}
+.blockEMPTY{border-right: 1px solid gray;border-bottom: 1px solid gray;display: inline-block;position: absolute;padding-top:1px;padding-left:1px;box-sizing: border-box;}
+.blockNUM{text-align: center;display: inline-block;position: absolute;}
+.blockOUT{margin: 0 auto;position: relative;}
+.blockAXIS{background-color: silver;display: inline-block;position: absolute;padding: 1px;z-index: -1;}
+.block{position: absolute;display: inline-block;z-index: 1;background-color: blue;height: 100%;width: 100%;}
+.playerHEAD{position: absolute;display: inline-block;z-index: 2;background-color: blue;}
+.console{overflow:auto;border: 1px solid #000000;font-size: 14px;margin: 4px;padding: 2px;bottom: 0px;top: 0px;left :0px;right:0px;position: absolute;}
+.consoleitem{border-bottom: 1px solid gray}
+.mainBody{margin: 16px;}
+.top{width:410px;}
+.mid{position: absolute;right: 16px;left: 450px;height: 100%;top :16px;}
+.mid_down{position: relative;left: 16px;width: 400px;height: 400px;top :16px;}
+
+.mid1{height: 70%;width:100%;position: relative;}
+.down{position: relative;width :410px;}
